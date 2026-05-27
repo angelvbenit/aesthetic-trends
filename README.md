@@ -1,74 +1,94 @@
-# Aesthetic Trends Intelligence Dashboard
+# Aesthetic Trend Intelligence (2021–2026)
 
-## Project Overview
-This project is an automated, end-to-end Business Intelligence solution designed to track, classify, and visualize the lifecycle of 74 distinct "Aesthetics" and micro-trends using Google Search volume data. 
+![Dashboard Demo](dashboard.gif)
 
-Built for retail, fashion, and marketing strategy, this pipeline replaces expensive agency trend reports by programmatically identifying which cultural aesthetics are emerging, which are highly profitable "goldmines," and which are statistically dead.
-
-## Tech Stack & Architecture
-* **Data Engineering (Python):** `pandas`, `pytrends`, `numpy`
-* **Pipeline Automation:** Exponential backoff scripts to bypass API rate limiting.
-* **Data Visualization (Power BI):** Cross-filtering Matrix visuals, Top N dynamic filtering, and custom UI/UX design via transparent layered containers.
+An automated, end-to-end Business Intelligence pipeline that tracks, classifies, and visualizes the lifecycle of 74 distinct internet aesthetics using Google Search volume data — built for retail, fashion, and marketing strategy.
 
 ---
 
-## Exact Findings & Strategic Insights
+## Why This Exists
 
-Based on the 2025-2026 data window, the algorithm analyzed 74 active micro-trends and yielded the following macro-market insights:
+Agency trend reports are expensive, opinionated, and stale by the time they land. This pipeline replaces them with a repeatable, math-driven system that runs on demand and classifies every aesthetic by where it actually sits in its commercial lifecycle — not where the internet *thinks* it sits.
 
-### 1. High Market Volatility & Inventory Risk
-The data proves the aesthetic trend cycle is rapidly accelerating. Out of the 74 aesthetics tracked, over **35% (26 trends) are classified as statistically "Dead"**. Brands holding physical inventory tied to aesthetics like *Tumblr Aesthetic*, *Coastal Granddaughter*, or *Apocalypse Chic* face severe markdown risks, as these trends currently occupy the "Saturated/Dead" quadrant of the matrix.
-
-### 2. The "Goldmine" Opportunities
-The Macro Opportunity Matrix successfully identified a specific cluster of trends possessing both high baseline search volume and strong positive momentum. The primary targets for immediate product development and marketing spend are:
-* **Clean Girl Aesthetic**
-* **Frutiger Aero**
-* **Old Money Aesthetic**
-* **Dark Academia**
-
-### 3. The "Social Media vs. Search Intent" Discrepancy
-The model identified **20 Emerging** trends and **12 Rising** trends. Crucially, the data revealed a massive discrepancy between "TikTok virality" and actual consumer search intent. Several aesthetics manually categorized by human assumption as "Currently Exploding" (e.g., *Tomato Girl Summer*) failed the objective mathematical threshold for high search volume. This indicates that while a trend may generate impressions on social media algorithms, it does not necessarily translate to the active consumer search behavior required to drive retail sales.
+The data source is Google Search intent, not social media impressions. Search measures active consumer behavior. It's a better leading indicator of retail sales than TikTok virality — and the data proves it.
 
 ---
 
-## Methodology & Lifecycle Logic
+## Key Findings (2025–2026 Window)
 
-The Python backend classifies trends into 6 distinct stages based on a trailing 52-week vs. previous 52-week mathematical comparison:
-1. **Emerging:** Low absolute volume, but extreme growth (>50% YoY).
-2. **Rising:** Consistent, steady growth (>15% YoY) but not at peak.
-3. **Peaking:** Current 8-week volume is within 80% of its all-time historical high.
-4. **Declining:** Past its peak, with negative growth (<-20% YoY).
-5. **Stable:** Moderate volume with flat growth patterns.
-6. **Dead:** Consistently flatlined near a score of 0-5 with zero recent growth.
+**35%+ of tracked aesthetics are statistically dead.**
+26 of 74 aesthetics — including *Tumblr Aesthetic*, *Coastal Granddaughter*, and *Apocalypse Chic* — have flatlined near a search score of 0–5. Brands holding inventory tied to these trends face significant markdown risk.
 
----
+**Four trends occupy the Goldmine quadrant** (high baseline volume + strong upward momentum):
+- Clean Girl Aesthetic
+- Old Money Aesthetic
+- Dark Academia
+- Frutiger Aero
 
-## Analytical Limitations
-* **Proxy Data Limitations:** The project analyzes Google Search intent as a proxy for Pinterest mood-board behavior. Search indicates "intent to buy/learn," which generally lags behind initial social media visual discovery.
-* **Relative Scaling Index:** Google Trends standardizes data on a 0-100 scale per batch, obfuscating absolute search query volumes. Therefore, the matrix measures *relative momentum* against peer trends, not exact market cap.
-* **Short-Term Viral Noise:** Despite utilizing a 4-week moving average to smooth the data, micro-trends are highly susceptible to short-term spikes driven by single viral weekends, which can occasionally result in a false-positive "Emerging" flag.
+**TikTok virality ≠ search intent.**
+Several aesthetics assumed to be "currently exploding" (e.g., *Tomato Girl Summer*) failed the objective search-volume threshold. A trend that generates impressions but not searches is a media trend, not a market trend.
 
 ---
 
-## How to Run the Pipeline Locally
+## Lifecycle Classification
 
-**1. Clone the repository:**
+Every aesthetic is classified into one of six stages based on a trailing 52-week vs. previous 52-week mathematical comparison:
+
+| Stage | Definition |
+|---|---|
+| **Emerging** | Low absolute volume, extreme growth (>50% YoY) |
+| **Rising** | Consistent steady growth (>15% YoY), not yet at peak |
+| **Peaking** | Current 8-week volume within 80% of all-time high |
+| **Declining** | Past peak, negative growth (<-20% YoY) |
+| **Stable** | Moderate volume, flat growth — evergreen but not accelerating |
+| **Dead** | Flatlined near 0–5, zero recent growth |
+
+---
+
+## Tech Stack
+
+| Layer | Tools |
+|---|---|
+| Data Engineering | Python — `pandas`, `pytrends`, `numpy` |
+| Pipeline Automation | Exponential backoff to handle Google Trends rate limiting |
+| Visualization | Power BI — cross-filter Matrix visuals, dynamic Top N filtering, custom layered UI |
+
+---
+
+## Run It Locally
+
+**1. Clone the repository**
 ```bash
-git clone [https://github.com/angelvbenit/aesthetic-trends.git](https://github.com/angelvbenit/aesthetic-trends.git)
-cd pinterest-trends
+git clone https://github.com/angelvbenit/aesthetic-trends.git
+cd aesthetic-trends
 ```
-**2. Set up the virtual environment & install dependencies:**
 
+**2. Set up environment and install dependencies**
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+source venv/bin/activate       # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
-**3. Run the Data Engine:**
-Note: This script includes automatic delays to prevent IP bans from the Google API.
 
+**3. Run the data pipeline**
 ```bash
 python run_pipeline.py
 ```
-***4. View the Dashboard:***
-Open outputs/dashboard.pbix in Power BI Desktop and click Refresh to load the newly generated datasets into the front-end layout.
+> Note: The script includes automatic delays to prevent IP bans from the Google Trends API.
+
+**4. Open the dashboard**
+Open `dashboard.pbix` in Power BI Desktop and click **Refresh** to load the newly generated datasets.
+
+---
+
+## Limitations
+
+- **Proxy data:** Google Search intent lags behind Pinterest/TikTok visual discovery by several weeks. This pipeline measures purchase intent, not inspiration.
+- **Relative scaling:** Google Trends normalizes on a 0–100 scale per batch — the matrix measures *relative momentum* against peer trends, not absolute market size.
+- **Viral noise:** A 4-week moving average smooths most spikes, but a single viral weekend can occasionally trigger a false-positive "Emerging" flag.
+
+---
+
+## License
+
+MIT — use it, fork it, extend it.
