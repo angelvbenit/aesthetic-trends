@@ -1,9 +1,7 @@
-# Pinterest Aesthetic Trend Analysis (2021-2026)
-
-![Dashboard Demo](https://github.com/angelvbenit/pinterest-trends/blob/main/dashboard.gif?raw=true)
+# Aesthetic Trends Intelligence Dashboard
 
 ## Project Overview
-This project is an automated, end-to-end Business Intelligence solution designed to track, classify, and visualize the lifecycle of 74 distinct "Pinterest Aesthetics" and micro-trends using Google Search volume data. 
+This project is an automated, end-to-end Business Intelligence solution designed to track, classify, and visualize the lifecycle of 74 distinct "Aesthetics" and micro-trends using Google Search volume data. 
 
 Built for retail, fashion, and marketing strategy, this pipeline replaces expensive agency trend reports by programmatically identifying which cultural aesthetics are emerging, which are highly profitable "goldmines," and which are statistically dead.
 
@@ -56,7 +54,7 @@ The Python backend classifies trends into 6 distinct stages based on a trailing 
 
 **1. Clone the repository:**
 ```bash
-git clone [https://github.com/angelvbenit/pinterest-trends.git](https://github.com/angelvbenit/pinterest-trends.git)
+git clone [https://github.com/angelvbenit/aesthetic-trends.git](https://github.com/angelvbenit/aesthetic-trends.git)
 cd pinterest-trends
 ```
 **2. Set up the virtual environment & install dependencies:**
@@ -73,4 +71,4 @@ Note: This script includes automatic delays to prevent IP bans from the Google A
 python run_pipeline.py
 ```
 ***4. View the Dashboard:***
-Open outputs/Aesthetic_Trends_Intelligence_Dashboard.pbix in Power BI Desktop and click Refresh to load the newly generated datasets into the front-end layout.
+Open outputs/dashboard.pbix in Power BI Desktop and click Refresh to load the newly generated datasets into the front-end layout.
